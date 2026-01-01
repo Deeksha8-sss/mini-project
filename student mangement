@@ -1,0 +1,91 @@
+import java.util.Scanner;
+
+class Student {
+    int roll;
+    String name;
+    String dept;
+
+    Student(int r, String n, String d) {
+        roll = r;
+        name = n;
+        dept = d;
+    }
+
+    void display() {
+        System.out.println(roll + "\t" + name + "\t" + dept);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        Student[] s = new Student[50];
+        int count = 0;
+
+        while (true) {
+            System.out.println("\n--- Student Management System ---");
+            System.out.println("1. Add Student");
+            System.out.println("2. View Students");
+            System.out.println("3. Search Student");
+            System.out.println("4. Exit");
+            System.out.print("Enter choice: ");
+
+            int choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    System.out.print("Enter Roll No: ");
+                    int r = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Enter Name: ");
+                    String n = sc.nextLine();
+
+                    System.out.print("Enter Department: ");
+                    String d = sc.nextLine();
+
+                    s[count] = new Student(r, n, d);
+                    count++;
+
+                    System.out.println("Student Added Successfully!");
+                    break;
+
+                case 2:
+                    System.out.println("\nRoll\tName\tDepartment");
+                    for (int i = 0; i < count; i++) {
+                        s[i].display();
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter Roll No to Search: ");
+                    int search = sc.nextInt();
+                    boolean found = false;
+
+                    for (int i = 0; i < count; i++) {
+                        if (s[i].roll == search) {
+                            System.out.println("\nStudent Found:");
+                            System.out.println("Roll\tName\tDepartment");
+                            s[i].display();
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        System.out.println("Student Not Found!");
+                    }
+                    break;
+
+                case 4:
+                    System.out.println("Thank You!");
+                    System.exit(0);
+
+                default:
+                    System.out.println("Invalid Choice!");
+            }
+        }
+    }
+}
